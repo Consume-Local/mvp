@@ -67,6 +67,12 @@
       </article>
     </section>
 
+    <div v-if="filtered === undefined" class="text-center w-full md:w-1/3 p-5 rounded border mx-auto">
+      <h3 class="font-bold pb-2 text-sm">Sin resultados para tu búsqueda</h3>
+      <p class="pb-1">Esta categoría o ubicación aún no tiene resultados, sé el primero en publicar:</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSepnj-Z34jCXcd8UmF9LJvh6IkQ9MRawWmy31coI0O_hst1YA/viewform" target="_blank" class="font-semibold px-4 py-2 bg-green-500 rounded-full text-white text-sm mx-1">Publicar Negocio</a>
+    </div>
+
     <div class="fixed bottom-0 inset-x-0" v-show="alert">
       <div class="mx-auto w-11/12 rounded bg-black p-3 rounded mb-2 text-white relative">
         <button @click="alert = !alert" class="p-2 rounded absolute right-0 top-0 text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
@@ -78,8 +84,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
