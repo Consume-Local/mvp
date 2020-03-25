@@ -3,8 +3,8 @@
 
     <div class="w-11/12 md:w-1/2 mx-auto" v-if="listing && listing.length > 0">
 
-      <div class="border rounded p-5 bg-white mb-5 flex items-center justify-between">
-        <div class="flex items-center">
+      <div class="border rounded p-5 bg-white mb-5 flex items-center justify-between flex-col md:flex-row">
+        <div class="flex items-center mb-4 md:mb-0">
           <div class="w-16 h-16 bg-red-500 rounded-lg flex items-center justify-center mr-2">
             <span class="font-bold text-white text-2xl">{{ listing[1][0] }}</span>
           </div>
@@ -21,9 +21,9 @@
 
       <div class="mb-5">
         <div class="-mx-1">
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[19] === 'Sí'"> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Para Llevar</span>
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[18] === 'Sí' "> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Servicio a Domicilio</span>
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[16] === 'Sí' " > <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Tienda en Linea</span>
+          <span class="bg-green-100 inline-block rounded-full m-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[19] === 'Sí'"> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Para Llevar</span>
+          <span class="bg-green-100 inline-block rounded-full m-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[18] === 'Sí' "> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Servicio a Domicilio</span>
+          <span class="bg-green-100 inline-block rounded-full m-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[16] === 'Sí' " > <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Tienda en Linea</span>
         </div>
       </div>
 
@@ -34,9 +34,9 @@
 
       <div class="border rounded p-5 bg-white mb-5">
         <h3 class="font-bold">Dirección</h3>
-        <div class="flex justify-between items-center">
-          <p class="leading-tight text-xl text-gray-600 pr-10 flex-1">{{ listing[3] }} #{{ listing[4] }} {{ listing[5] }}, {{ listing[6] }}, {{ listing[7] }}, {{ listing[8] }}, {{ listing[9] }} </p>
-          <a class="bg-green-500 text-white inline-block rounded font-semibold text-xl px-3 py-2" :href="address">Ver en Mapa</a>
+        <div class="flex justify-between items-center flex-col md:flex-row">
+          <p class="leading-tight text-xl text-gray-600 pr-10 flex-1 mb-2 md:mb-0">{{ listing[3] }} #{{ listing[4] }} {{ listing[5] }}, {{ listing[6] }}, {{ listing[7] }}, {{ listing[8] }}, {{ listing[9] }} </p>
+          <a class="w-full md:w-auto text-center bg-green-500 text-white inline-block rounded font-semibold text-xl px-3 py-2" :href="address">Ver en Mapa</a>
         </div>
       </div>
 

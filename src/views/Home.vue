@@ -46,7 +46,7 @@
             <h3 class="font-bold">{{ listing[1] }}</h3>
           </div>
 
-          <span class="inline-block text-sm p-1 rounded bg-gray-200 font-semibold">{{ listing[2] }}</span>
+          <span class="inline-block text-center text-sm p-1 rounded bg-gray-200 font-semibold">{{ listing[2] }}</span>
         </div>
 
         <div class="flex text-gray-600 pb-2">
@@ -55,9 +55,9 @@
         </div>
 
         <div class="-mx-1">
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[19] === 'Sí'"> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Para Llevar</span>
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[18] === 'Sí' "> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Servicio a Domicilio</span>
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[16] === 'Sí' " > <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Tienda en Linea</span>
+          <span class="bg-green-100 inline-block rounded-full m-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[19] === 'Sí'"> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Para Llevar</span>
+          <span class="bg-green-100 inline-block rounded-full m-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[18] === 'Sí' "> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Servicio a Domicilio</span>
+          <span class="bg-green-100 inline-block rounded-full m-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[16] === 'Sí' " > <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Tienda en Linea</span>
         </div>
 
         <div class="text-right">
