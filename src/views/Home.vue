@@ -40,7 +40,6 @@
         :listing="listing"
         :key="`listing-${index}`"
         />
-
     </section>
 
     <div v-if="filteredListings === undefined || filteredListings.length < 1" class="text-center w-full md:w-1/3 p-5 rounded border mx-auto">

@@ -48,7 +48,7 @@
     </div>
 
     <div class="modal fixed inset-0" v-show="modal">
-      <div class="bg-white p-5 rounded shadow-lg relative z-20 my-2 w-1/3 mx-auto">
+      <div class="bg-white p-5 rounded shadow-lg relative z-20 my-2 w-11:12 md:w-1/3 mx-auto">
 
         <div class="flex items-center justify-between">
           <h3 class="font-bold mb-2">Datos de Contacto</h3>
