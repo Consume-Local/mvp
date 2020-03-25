@@ -32,42 +32,18 @@
 
     <section class="grid grid-cols-1 md:grid-cols-3 gap-3 p-5">
 
-      <input v-model="category" type="radio" id="All" name="categories" value="Tido Tipo" checked class="hidden">
+      <input v-model="category" type="radio" id="All" name="categories" value="Todo Tipo" checked class="hidden">
       <input v-for="(cat, index) in categories" :key="index" v-model="category" type="radio" :id="cat" name="categories" :value="cat" class="hidden">
 
-      <article v-for="(listing, index) in filtered" :key="`listing-${index}`" class="bg-white w-full rounded shadow p-3 mb-2" :data-category="listing[2]">
+      <ListingPreview
+        v-for="(listing, index) in filteredListings"
+        :listing="listing"
+        :key="`listing-${index}`"
+        />
 
-        <div class="flex justify-between items-center pb-4">
-
-          <div class="flex items-center">
-            <div class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center mr-2">
-              <span class="font-bold text-white">{{ listing[1][0] }}</span>
-            </div>
-            <h3 class="font-bold">{{ listing[1] }}</h3>
-          </div>
-
-          <span class="inline-block text-sm p-1 rounded bg-gray-200 font-semibold">{{ listing[2] }}</span>
-        </div>
-
-        <div class="flex text-gray-600 pb-2">
-          <svg class="mr-2 mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
-          <p class="leading-tight">{{ listing[3] }} #{{ listing[4] }} {{ listing[5] }}, {{ listing[6] }}, {{ listing[7] }}, {{ listing[8] }}, {{ listing[9] }} </p>
-        </div>
-
-        <div class="-mx-1">
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[19] === 'Sí'"> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Para Llevar</span>
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[18] === 'Sí' "> <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Servicio a Domicilio</span>
-          <span class="bg-green-100 inline-block rounded-full mx-1 px-3 py-1 border border-green-200 text-xs font-semibold text-green-800" v-if="listing[16] === 'Sí' " > <svg class="mr-1 inline-block text-green-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg> Tienda en Linea</span>
-        </div>
-
-        <div class="text-right">
-          <router-link :to="`${ listing[23] }`" class="border inline-block px-5 py-2 rounded font-semibold bg-green-500 text-white text-sm">Ver Datos</router-link>
-        </div>
-
-      </article>
     </section>
 
-    <div v-if="filtered === undefined" class="text-center w-full md:w-1/3 p-5 rounded border mx-auto">
+    <div v-if="filteredListings === undefined || filteredListings.length < 1" class="text-center w-full md:w-1/3 p-5 rounded border mx-auto">
       <h3 class="font-bold pb-2 text-sm">Sin resultados para tu búsqueda</h3>
       <p class="pb-1">Esta categoría o ubicación aún no tiene resultados, sé el primero en publicar:</p>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSepnj-Z34jCXcd8UmF9LJvh6IkQ9MRawWmy31coI0O_hst1YA/viewform" target="_blank" class="font-semibold px-4 py-2 bg-green-500 rounded-full text-white text-sm mx-1">Publicar Negocio</a>
@@ -86,6 +62,8 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import ListingPreview from '@/components/ListingPreview.vue';
+
 export default {
   name: 'Home',
   data() {
@@ -101,17 +79,31 @@ export default {
       'states',
       'listings',
     ]),
-    filtered() {
-      return (this.state === "Todo México")
-        ? this.listings
-        : this.listings.filter(el => el[9] === this.state);
+
+    filteredListings() {
+      const rawListings = this.listings;
+      const filteredByState = this.filterListingByState(rawListings);
+      const filteredByCategory = this.filterListingByCategory(filteredByState);
+      return filteredByCategory
     },
   },
 
   methods:{
     filter() {
       this.$router.push({ query: Object.assign({}, this.$route.query, { location: this.state }) });
-    }
+    },
+
+    filterListingByState(listings) {
+      return (this.state === 'Todo México')
+        ? listings
+        : listings.filter(el => el[9] === this.state);
+    },
+
+    filterListingByCategory(listings) {
+      return (this.category === 'Todo Tipo' || this.category == 'Todos')
+        ? listings
+        : listings.filter(el => el[2] === this.category);
+    },
   },
   mounted() {
     getparams: {
@@ -121,28 +113,9 @@ export default {
         this.state = 'Todo México'
       }
     }
+  },
+  components: {
+    ListingPreview,
   }
 }
 </script>
-
-<style>
-  [value="Tido Tipo"]:checked ~ [data-category] {
-    display: block;
-  }
-
-  [value="Comida"]:checked ~ article:not([data-category~="Comida"]),
-  [value="Supermercados y Tiendas"]:checked ~ article:not([data-category~="Supermercados y Tiendas"]),
-  [value="Carniceria"]:checked ~ article:not([data-category~="Carniceria"]),
-  [value="Verdulería"]:checked ~ article:not([data-category~="Verdulería"]),
-  [value="Dulcería"]:checked ~ article:not([data-category~="Dulcería"]),
-  [value="Farmacia"]:checked ~ article:not([data-category~="Farmacia"]),
-  [value="Ferretería"]:checked ~ article:not([data-category~="Ferretería"]),
-  [value="Compras"]:checked ~ article:not([data-category~="Compras"]),
-  [value="Ropa y Accesorios"]:checked ~ article:not([data-category~="Ropa y Accesorios"]),
-  [value="Tintorería"]:checked ~ article:not([data-category~="Tintorería"]),
-  [value="Florería"]:checked ~ article:not([data-category~="Florería"]),
-  [value="Mascotas"]:checked ~ article:not([data-category~="Mascotas"]),
-  [value="Otr"]:checked ~ article:not([data-category~="Otro"]) {
-    display: none;
-  }
-</style>
