@@ -28,8 +28,8 @@
 
       </div>
 
-      <nav class="w-1/3 text-right">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSepnj-Z34jCXcd8UmF9LJvh6IkQ9MRawWmy31coI0O_hst1YA/viewform" target="_blank" class="font-semibold px-4 py-2 bg-green-500 rounded-full text-white text-sm mx-1">Publicar Negocio</a>
+      <nav class="w-full md:w-1/3 text-right">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSepnj-Z34jCXcd8UmF9LJvh6IkQ9MRawWmy31coI0O_hst1YA/viewform" target="_blank" class="font-semibold px-4 py-2 bg-green-500 rounded-full text-white text-sm mx-1 inline-block ">Publicar Negocio</a>
       </nav>
     </header>
     <router-view />
