@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="min-h-screen bg-gray-100 antialiased">
     <header class="px-5 py-2 bg-white flex items-center border-b justify-between">
-      
+
       <nav class="w-1/3 hidden md:inline-block">
         <router-link to="/" class="inline-block font-semibold px-4 py-2 border rounded-full text-gray-700 text-sm mx-1">Inicio</router-link>
         <router-link to="/colaborar" class="inline-block font-semibold px-4 py-2 border rounded-full text-gray-700 text-sm mx-1">¿Cómo colaborar?</router-link>
@@ -35,3 +35,15 @@
     <router-view />
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'App',
+
+  beforeMount() {
+    this.$store.dispatch('FETCH_LISTINGS');
+  }
+}
+</script>
