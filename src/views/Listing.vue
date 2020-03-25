@@ -38,7 +38,6 @@
           <p class="leading-tight text-xl text-gray-600 pr-10 flex-1">{{ listing[3] }} #{{ listing[4] }} {{ listing[5] }}, {{ listing[6] }}, {{ listing[7] }}, {{ listing[8] }}, {{ listing[9] }} </p>
           <a class="bg-green-500 text-white inline-block rounded font-semibold text-xl px-3 py-2" :href="address">Ver en Mapa</a>
         </div>
-        <!-- <iframe width='100%' height='100%' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' :src='address'></iframe> -->
           
       </div>
 
@@ -86,10 +85,6 @@
     computed: {
       address() {
         var x = this.listing[3] + ' ' + this.listing[4] + ' ' + this.listing[5] + ',' + this.listing[6] + ',' + this.listing[7] + ',' + this.listing[8] + ',' + this.listing[9]
-
-        // return 'https://maps.google.com/maps?&amp;q='+encodeURIComponent(x)+'&amp;output=embed'
-        // return 'https://www.google.com/maps/embed/v1/place?q='+encodeURIComponent(x)+'&key=AIzaSyD2BDqSLvHXyTslgFko8BZg4xKtCIMceYk'
-        // return 'https://maps.google.com/maps?q='+encodeURIComponent(x)+'&amp;ie=UTF8&amp;&amp;output=embed"'
         return 'https://www.google.com/maps/search/'+encodeURIComponent(x)+''
       }
     },
