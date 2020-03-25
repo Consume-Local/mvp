@@ -61,7 +61,7 @@
         </div>
 
         <div class="text-right">
-          <router-link :to="`${ listing[23] }`" class="border inline-block px-5 py-2 rounded font-semibold bg-green-500 text-white text-sm">Ver Datos</router-link>
+          <router-link :to="`${ listing[23] }`" class="border inline-block px-5 py-2 rounded font-semibold bg-green-500 text-white text-sm mb-1">Ver Negocio</router-link>
         </div>
 
       </article>
