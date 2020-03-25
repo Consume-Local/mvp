@@ -13,7 +13,7 @@
           <label class="text-sm m-1 inline-block mx-1 py-2 px-4 hover:bg-green-500 hover:text-white hover:border-transparent cursor-pointer rounded border" for="All">Todos</label>
           <label v-for="(cat, index) in categories" :key="index" class="text-sm m-1 inline-block mx-1 py-2 px-4 hover:bg-green-500 hover:text-white hover:border-transparent cursor-pointer rounded border" :for="cat">{{ cat }}</label>
         </div>
-        
+
         <div class="relative mb-2 md:mb-0 w-full md:w-auto">
           <select class="block appearance-none w-full bg-transparent font-bold pl-4 py-2 pr-10 border outline-none" v-model="state" @change="filter">
             <option>Todo México</option>
@@ -35,7 +35,7 @@
       <input v-model="category" type="radio" id="All" name="categories" value="Tido Tipo" checked class="hidden">
       <input v-for="(cat, index) in categories" :key="index" v-model="category" type="radio" :id="cat" name="categories" :value="cat" class="hidden">
 
-      <article v-for="(listing, index) in filtered" :key="index" class="bg-white w-full rounded shadow p-3 mb-2" :data-category="listing[2]">
+      <article v-for="(listing, index) in filtered" :key="`listing-${index}`" class="bg-white w-full rounded shadow p-3 mb-2" :data-category="listing[2]">
 
         <div class="flex justify-between items-center pb-4">
 
@@ -48,7 +48,7 @@
 
           <span class="inline-block text-sm p-1 rounded bg-gray-200 font-semibold">{{ listing[2] }}</span>
         </div>
-        
+
         <div class="flex text-gray-600 pb-2">
           <svg class="mr-2 mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
           <p class="leading-tight">{{ listing[3] }} #{{ listing[4] }} {{ listing[5] }}, {{ listing[6] }}, {{ listing[7] }}, {{ listing[8] }}, {{ listing[9] }} </p>
@@ -84,102 +84,31 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
   data() {
     return {
       alert: true,
-      listings: [],
       category: 'Todo Tipo',
       state: 'Todo México',
-      categories: [
-        'Comida',
-        'Supermercados y Tiendas',
-        'Carniceria',
-        'Verdulería',
-        'Dulcería',
-        'Farmacia',
-        'Ferretería',
-        'Compras',
-        'Ropa y Accesorios',
-        'Tintorería',
-        'Florería',
-        'Mascotas',
-        'Otro'
-      ],
-      states: [
-        'Aguascalientes',
-        'Baja California Sur',
-        'Baja California',
-        'Campeche',
-        'Chiapas',	 
-        'Chihuahua',
-        'Ciudad de México',
-        'Coahuila de Zaragoza',
-        'Colima',
-        'Durango',
-        'Guanajuato',
-        'Guerrero',
-        'Hidalgo',
-        'Jalisco',
-        'Michoacán de Ocampo',
-        'Morelos',
-        'Nayarit',
-        'Nuevo León',
-        'Oaxaca',
-        'Puebla',
-        'Querétaro',
-        'Quintana Roo',
-        'San Luis Potosí',
-        'Sinaloa',
-        'Sonora',
-        'Tabasco',
-        'Tamaulipas',
-        'Tlaxcala',
-        'Veracruz',
-        'Yucatán',
-        'Zacatecas'
-      ]
     }
   },
   computed: {
+    ...mapGetters([
+      'categories',
+      'states',
+      'listings',
+    ]),
     filtered() {
-      var filtered = []
-      var items = this.listings;
-
-      if (this.state === "Todo México") {
-        filtered = items
-      } else {
-        for(var i = 0; i < items.length; i++) {
-          if (items[i][9] === this.state) {
-            filtered.push(items[i]);
-            break;
-          }
-        }
-      }
-
-      return filtered
-    }
-  },
-  created(){
-    this.getListings()
-  },
-  methods:{
-    getListings(){
-      var idSheets = '1iZyysygqeyx_a2qDEzuF19otP8HSR2MIFr0MkSSKUCs';
-      var apiKey = 'AIzaSyD2BDqSLvHXyTslgFko8BZg4xKtCIMceYk'; 
-      var values = 'A2:AZ100';
-
-      fetch("https://content-sheets.googleapis.com/v4/spreadsheets/" +   idSheets + "/values/A2:AZ100?access_token="+ apiKey +"&key="+  apiKey)
-      .then((list)=>{
-        return list.json()
-      }).then((items)=>{
-        this.listings = items.values
-      }).catch(err=>{
-        console.log(err);
-      })
+      return (this.state === "Todo México")
+        ? this.listings
+        : this.listings.filter(el => el[9] === this.state);
     },
+  },
+
+  methods:{
     filter() {
       this.$router.push({ query: Object.assign({}, this.$route.query, { location: this.state }) });
     }
