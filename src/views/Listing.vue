@@ -79,6 +79,11 @@ export default {
       modal: false
     }
   },
+
+  props: {
+    slug: String,
+  },
+
   computed: {
     address() {
       var x = this.listing[3] + ' ' + this.listing[4] + ' ' + this.listing[5] + ',' + this.listing[6] + ',' + this.listing[7] + ',' + this.listing[8] + ',' + this.listing[9]
@@ -92,9 +97,7 @@ export default {
     ]),
 
     listing() {
-      const listing = this.listingBySlug(this.$route.params.slug);
-
-      return listing;
+      return this.listingBySlug(this.slug);
     }
   },
 }
